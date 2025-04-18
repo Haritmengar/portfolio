@@ -735,47 +735,106 @@
 
         <section class="timeline">
 
-          <div class="title-wrapper">
-            <div class="icon-box">
+          <div class="title-wrapper" style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem;">
+            <div class="icon-box" style="font-size: 1.8rem; color: #FFD700;">
               <ion-icon name="ribbon-outline"></ion-icon>
             </div>
-            <h3 class="h3">Certifications</h3>
+            <h3 class="h3" style="font-size: 1.75rem; font-weight: bold; color: #fff;">Certifications</h3>
           </div>
 
           <div style="
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
-            margin-top: 0.5rem;">
+            padding: 1rem 0;
+          ">
 
-            <!-- Python Basic Certificate -->
+            <!-- Certificate Card -->
             <div style="
-              flex: 1 1 300px;
-              max-width: 100%;
-              background-color: #1e1e1e;
+              background-color: #252525;
               padding: 1rem;
-              border-radius: 12px;
-              box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+              border-radius: 16px;
+              box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+              transition: transform 0.3s, box-shadow 0.3s;
+            " onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 10px 24px rgba(0,0,0,0.6)';"
+              onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.4)';">
               <img src="assets/images/python_basic_certificate.webp" alt="Python Basic Certificate"
-                style="width: 100%; height: auto; border-radius: 8px; object-fit: contain;" />
+                style="width: 100%; border-radius: 12px; object-fit: contain;" />
             </div>
 
             <!-- Problem Solving Certificate -->
             <div style="
-              flex: 1 1 300px;
-              max-width: 100%;
-              background-color: #1e1e1e;
+              background-color: #252525;
               padding: 1rem;
-              border-radius: 12px;
-              box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+              border-radius: 16px;
+              box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+              transition: transform 0.3s, box-shadow 0.3s;
+            " onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 10px 24px rgba(0,0,0,0.6)';"
+              onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.4)';">
               <img src="assets/images/python_basic_problem_solving_certificate.webp"
                 alt="Python Problem Solving Certificate"
-                style="width: 100%; height: auto; border-radius: 8px; object-fit: contain;" />
+                style="width: 100%; border-radius: 12px; object-fit: contain;" />
+            </div>
+
+            <!-- CSS Certificate -->
+            <div style="
+              background-color: #252525;
+              padding: 1rem;
+              border-radius: 16px;
+              box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+              transition: transform 0.3s, box-shadow 0.3s;
+            " onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 10px 24px rgba(0,0,0,0.6)';"
+              onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.4)';">
+              <img src="assets/images/css.webp" alt="CSS Certificate"
+                style="width: 100%; border-radius: 12px; object-fit: contain;" />
+            </div>
+
+            <!-- SQL Certificate -->
+            <div style="
+              background-color: #252525;
+              padding: 1rem;
+              border-radius: 16px;
+              box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+              transition: transform 0.3s, box-shadow 0.3s;
+            " onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 10px 24px rgba(0,0,0,0.6)';"
+              onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.4)';">
+              <img src="assets/images/sql.webp" alt="SQL Certificate"
+                style="width: 100%; border-radius: 12px; object-fit: contain;" />
             </div>
 
           </div>
         </section>
+
+        <!-- Popup Modal -->
+        <div id="imageModal" style="
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          background-color: rgba(0,0,0,0.7);
+          backdrop-filter: blur(8px);
+          display: none;
+          justify-content: center;
+          align-items: center;
+          z-index: 1000;
+          ">
+          <span onclick="closeModal()" style="
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            z-index: 1001;
+          ">&times;</span>
+          <img id="modalImage" src="" alt="Certificate" style="
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.8);
+          " />
+        </div>
 
         <section class="skill">
           <div class="title-wrapper">
@@ -1370,6 +1429,10 @@
     </div>
 
   </main>
+
+
+
+
 
 
   <!--
