@@ -157,3 +157,25 @@ for (let i = 0; i < navigationLinks.length; i++) {
 
   });
 }
+
+const modal = document.getElementById("imageModal");
+const modalImage = document.getElementById("modalImage");
+
+document.querySelectorAll(".timeline img").forEach(img => {
+  img.addEventListener("click", () => {
+    modal.style.display = "flex";
+    modalImage.src = img.src;
+  });
+});
+
+function closeModal() {
+  modal.style.display = "none";
+  modalImage.src = "";
+}
+
+// Close modal when clicking outside the image
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    closeModal();
+  }
+});
