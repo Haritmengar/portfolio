@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Work Gallery</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Ionicons for eye icon -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0d0d0d;
+            color: #fff;
+            min-height: 100vh;
+            padding: 40px;
+        }
+
+        h3 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: #FFD700;
+            font-weight: 800;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .image-box {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            background: #1a1a1a;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.05);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease, filter 0.3s ease;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(3px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .overlay ion-icon {
+            color: #FFD700;
+            font-size: 36px;
+        }
+
+        .image-box:hover .overlay {
+            opacity: 1;
+        }
+
+        .image-box:hover img {
+            transform: scale(1.05);
+            filter: blur(2px);
+        }
+
+        /* Fullscreen Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(6px);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 9999;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal img {
+            max-width: 90vw;
+            max-height: 80vh;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.2);
+        }
+
+        .thumbnails {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .thumbnails img {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .thumbnails img:hover {
+            border-color: #FFD700;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 28px;
+            color: #FFD700;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .image-box {
+                border-radius: 07px;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 14px;
+            }
+
+            .modal img {
+                max-width: 95vw;
+                max-height: 60vh;
+                border-radius: 07px;
+            }
+
+            .thumbnails img {
+                width: 60px;
+                height: 45px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 20px;
+            }
+
+            h3 {
+                font-size: 1.5rem;
+                margin-bottom: 24px;
+            }
+
+            .modal-close {
+                top: 10px;
+                right: 20px;
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h3>My Work Gallery</h3>
+
+    <div class="gallery">
+        <div class="image-box" data-src="https://i.ibb.co/Q7P612H1/IMG-5749.png">
+            <img src="https://i.ibb.co/Q7P612H1/IMG-5749.png" alt="Work 1" />
+            <div class="overlay"><ion-icon name="eye-outline"></ion-icon></div>
+        </div>
+        <div class="image-box" data-src="https://i.ibb.co/YTBSptxQ/IMG-5750.webp">
+            <img src="https://i.ibb.co/YTBSptxQ/IMG-5750.webp" alt="Work 2" />
+            <div class="overlay"><ion-icon name="eye-outline"></ion-icon></div>
+        </div>
+        <div class="image-box" data-src="https://i.ibb.co/3ydCqKxT/IMG-5748.webp">
+            <img src="https://i.ibb.co/3ydCqKxT/IMG-5748.webp" alt="Work 3" />
+            <div class="overlay"><ion-icon name="eye-outline"></ion-icon></div>
+        </div>
+        <div class="image-box" data-src="https://i.ibb.co/CKMCc1hz/IMG-5752.webp">
+            <img src="https://i.ibb.co/CKMCc1hz/IMG-5752.webp" alt="Work 4" />
+            <div class="overlay"><ion-icon name="eye-outline"></ion-icon></div>
+        </div>
+        <div class="image-box" data-src="https://i.ibb.co/XkV6Wdpv/IMG-5751.webp">
+            <img src="https://i.ibb.co/XkV6Wdpv/IMG-5751.webp" alt="Work 5" />
+            <div class="overlay"><ion-icon name="eye-outline"></ion-icon></div>
+        </div>
+    </div>
+
+    <!-- Modal for full-screen view -->
+    <div class="modal" id="modal">
+        <div class="modal-close" onclick="closeModal()">&times;</div>
+        <img id="modal-img" src="" alt="Full Image" />
+        <div class="thumbnails" id="thumbnail-bar"></div>
+    </div>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.utils.toArray('.image-box').forEach((box, index) => {
+            gsap.from(box, {
+                opacity: 0,
+                y: 60,
+                duration: 1,
+                delay: index * 0.1,
+                scrollTrigger: {
+                    trigger: box,
+                    start: 'top 85%',
+                    toggleActions: 'play none none reverse',
+                }
+            });
+        });
+
+        const imageBoxes = document.querySelectorAll('.image-box');
+        const modal = document.getElementById('modal');
+        const modalImg = document.getElementById('modal-img');
+        const thumbnailBar = document.getElementById('thumbnail-bar');
+
+        const images = Array.from(imageBoxes).map(box => box.dataset.src);
+
+        imageBoxes.forEach((box, index) => {
+            box.addEventListener('click', () => {
+                modal.classList.add('active');
+                modalImg.src = images[index];
+                renderThumbnails(index);
+            });
+        });
+
+        function renderThumbnails(activeIndex) {
+            thumbnailBar.innerHTML = '';
+            images.forEach((src, i) => {
+                const thumb = document.createElement('img');
+                thumb.src = src;
+                thumb.onclick = () => modalImg.src = src;
+                if (i === activeIndex) thumb.style.borderColor = '#FFD700';
+                thumbnailBar.appendChild(thumb);
+            });
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            modalImg.src = '';
+        }
+    </script>
+</body>
+
+</html>
